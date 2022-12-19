@@ -1,0 +1,22 @@
+    1  sudo apt update
+    2  sudo apt-get upgrade
+    3  sudo apt update
+    4  sudo apt -y install haproxy
+       sudo gedit /etc/haproxy/haproxy.cfg
+       add the following configurations in haproxy file
+       "frontend http_front
+		bind*:80
+		stats uri /haproxy?stats
+		default_backend server_group
+	backend server_group
+		balance roundrobin
+		server kaushal.example.com 192.168.122.98:80 check
+		server web1.example.com    192.168.122.181:80 check"
+    5  sudo service restart haproxy
+    6  sudo service haproxy restart
+    7  sudo service haproxy.service restart
+   10  sudo service haproxy enable
+   11  sudo service haproxy start
+   12  journalctl -xeu haproxy.service
+   13  history
+
